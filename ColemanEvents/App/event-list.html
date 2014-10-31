@@ -1,0 +1,36 @@
+﻿<div class="row">
+	<div class="col-md-12">
+		<h2>
+			Events
+			<a class="pull-right btn btn-success" href="#/add">add</a>
+		</h2>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div ng-show="vm.events.length == 0">
+			There are no events
+		</div>
+		<table class="table table-striped" ng-show="vm.events.length > 0">
+			<thead>
+				<tr>
+					<th>
+						Name
+					</th>
+					<th>
+						Date
+					</th>
+					<th>
+						&nbsp;
+					</th>
+				</tr>
+			</thead>
+			<tr ng-repeat="e in vm.events">
+				<td>{{ e.name }}</td>
+				<td>{{ e.date }}</td>
+				<td><a class="btn btn-default" ng-href="#/details/{{ e.id }}">view</a></td>
+			</tr>
+		</table>
+
+	</div>
+</div>

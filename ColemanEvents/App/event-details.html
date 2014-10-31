@@ -1,0 +1,46 @@
+﻿<div class="row">
+	<div class="col-md-7">
+		<h1>
+			{{ vm.event.name }}
+		</h1>
+		<p class="date">
+			{{ vm.event.date }}
+		</p>
+		<address class="address">
+			{{ vm.event.addressLine1 }}
+			<br />
+			{{ vm.event.addressLine2 }}
+			<br />
+			<a target="_blank" class="btn btn-link" ng-href="{{ vm.event.mapUrl }}">map to location</a>
+		</address>
+		<div id="AssignmentsContainer">
+			<h3>
+				Assignments
+			</h3>
+			<div class="help-block">
+				<small>
+					Please enter your name in the text box next to the assignment you would like to take and hit the "take" button
+				</small>
+			</div>
+			<table class="table table-striped">
+				<tbody>
+					<tr ng-repeat="a in vm.event.assignments">
+						<td>
+							{{ a.name }}
+						</td>
+						<td>
+							<span ng-show="a.isAssigned" class="form-control-static input-sm">{{ a.assignedTo }}</span>
+							<input class="form-control input-sm" ng-hide="a.isAssigned" ng-model="a.assignedTo" placeholder="Name..." />
+						</td>
+						<td>
+							<button ng-hide="a.isAssigned" class="btn btn-sm btn-default" ng-click="vm.takeAssignment(a)">take</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-5 visible-md visible-lg">
+		<img class="img-responsive" ng-src="{{vm.event.imageUrl}}" />
+	</div>
+</div>
