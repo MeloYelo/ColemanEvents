@@ -12,9 +12,8 @@
 				};
 
 				eventsService.getActiveEvents().then(function (data) {
-					console.log(data);
 					vm.events = data;
-				}, function (data) {
+				}, function () {
 					notificationService.error('There was a problem getting the events');
 				});
 			}

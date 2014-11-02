@@ -48,7 +48,6 @@
 				};
 
 				function assign(eventId, assignment) {
-					console.log(assignment);
 					return $http.post('/Api/Event/Assign', { id: eventId, assignmentId: assignment.id, assignedTo: assignment.assignedTo }).then(function (response) {
 						return response.data;
 					});
