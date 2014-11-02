@@ -1,5 +1,5 @@
 ﻿<div class="row">
-	<div class="col-md-7">
+	<div class="col-md-offset-2 col-md-8">
 		<h1>
 			{{ vm.event.name }}
 		</h1>
@@ -24,7 +24,7 @@
 			</div>
 			<table class="table table-striped">
 				<tbody>
-					<tr ng-repeat="a in vm.event.assignments">
+					<tr ng-repeat="a in vm.event.assignments | orderBy: 'name'">
 						<td>
 							{{ a.name }}
 						</td>
@@ -39,8 +39,5 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-	<div class="col-md-5 visible-md visible-lg">
-		<img class="img-responsive" ng-src="{{vm.event.imageUrl}}" />
 	</div>
 </div>

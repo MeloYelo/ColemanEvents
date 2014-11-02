@@ -1,4 +1,7 @@
-﻿<div class="row">
+﻿<ol class="breadcrumb">
+	<li class="active">List of Events</li>
+</ol>
+<div class="row">
 	<div class="col-md-12">
 		<h2>
 			Events
@@ -28,7 +31,11 @@
 			<tr ng-repeat="e in vm.events">
 				<td>{{ e.name }}</td>
 				<td>{{ e.date }}</td>
-				<td><a class="btn btn-default" ng-href="#/details/{{ e.id }}">view</a></td>
+				<td>
+					<a class="btn btn-default" ng-href="#/assignments/{{ e.id }}">assignments</a>
+					<a class="btn btn-default" ng-href="#/details/{{ e.id }}">view</a>
+					<button type="button" ng-click="vm.makeDefaultEvent(e)" class="btn btn-default">default</button>
+				</td>
 			</tr>
 		</table>
 

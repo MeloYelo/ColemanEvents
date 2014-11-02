@@ -80,10 +80,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\add-event.html" />
-    <Content Include="App\app.js" />
-    <Content Include="App\event-details.html" />
-    <Content Include="App\event-list.html" />
+    <Content Include="app\add-event.html" />
+    <Content Include="app\app.js" />
+    <Content Include="app\assignments.html" />
+    <Content Include="app\controllers.js" />
+    <Content Include="app\event-details.html" />
+    <Content Include="app\event-list.html" />
+    <Content Include="app\services.js" />
     <Content Include="Global.asax" />
     <Content Include="images\turkey.jpg" />
     <Content Include="index.html" />
@@ -148,6 +151,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Event.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +216,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
