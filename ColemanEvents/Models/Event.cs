@@ -14,6 +14,7 @@ namespace ColemanEvents.Models
 		public string AddressLine1 { get; set; }
 		public string AddressLine2 { get; set; }
 		public string MapUrl { get; set; }
+		public string Details { get; set; }
 
 		public ICollection<Assignment> Assignments
 		{
