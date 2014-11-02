@@ -3,9 +3,9 @@
 		<h1>
 			{{ vm.event.name }}
 		</h1>
-		<p class="date">
+		<h4 class="date">
 			{{ vm.event.date }}
-		</p>
+		</h4>
 		<address class="address">
 			{{ vm.event.addressLine1 }}
 			<br />
@@ -13,6 +13,9 @@
 			<br />
 			<a target="_blank" class="btn btn-link" ng-href="{{ vm.event.mapUrl }}">map to location</a>
 		</address>
+		<p ng-show="vm.event.details" class="details">
+			{{ vm.event.details }}
+		</p>
 		<div id="AssignmentsContainer">
 			<h3>
 				Assignments
