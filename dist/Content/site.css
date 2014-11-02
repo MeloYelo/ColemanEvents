@@ -1,0 +1,68 @@
+﻿/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+	color: #f00;
+}
+
+.field-validation-valid {
+	display: none;
+}
+
+.input-validation-error {
+	border: 1px solid #f00;
+	background-color: #fee;
+}
+
+.validation-summary-errors {
+	font-weight: bold;
+	color: #f00;
+}
+
+.validation-summary-valid {
+	display: none;
+}
+
+.subnavbar .subnavbar-inner .container ul.mainnav > li > a {
+	color: #c2c2c2;
+}
+
+	.subnavbar .subnavbar-inner .container ul.mainnav > li > a:hover {
+		color: #e0e0e0;
+	}
+
+.subnavbar .subnavbar-inner .container ul.mainnav > li.active > a,
+.subnavbar .subnavbar-inner .container ul.mainnav > li.active > a:hover {
+	background: #3F2315;
+	color: #ddd;
+}
+
+.navbar-inner {
+	background: #25110A;
+}
+
+.subnavbar-inner {
+	background: #311B10;
+	background-image: -moz-linear-gradient(top, #5A3620, #3F2315);
+	background-image: -ms-linear-gradient(top, #5A3620, #3F2315);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5A3620), to(#3F2315));
+	background-image: -webkit-linear-gradient(top, #5A3620, #3F2315);
+	background-image: -o-linear-gradient(top, #5A3620, #3F2315);
+	background-image: linear-gradient(top, #5A3620, #3F2315);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5A3620', endColorstr='#3F2315', GradientType=0);
+}
+
+.subnavbar {
+	border-top-color: #5A3620;
+}
+
+	.subnavbar .container > ul > li {
+		border-left-color: #5A3620;
+	}
+
+	.subnavbar .container > ul {
+		border-right-color: #5A3620;
+	}
+
+.footer-inner {
+	background-color: #20110A;
+}

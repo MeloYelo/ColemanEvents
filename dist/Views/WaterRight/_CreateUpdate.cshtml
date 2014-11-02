@@ -1,0 +1,153 @@
+﻿@using WGRanch.Models
+@model WaterRight
+
+@{
+	var statuses = new[]
+		{
+			new Status { Text = "", Value = "" },
+			new Status { Text = "CER", Value = "CER" },
+			new Status { Text = "VST", Value = "VST" }, 
+			new Status { Text = "PER", Value = "PER" }, 
+			new Status { Text = "EXP", Value = "EXP" }, 
+			new Status { Text = "WDR", Value = "WDR" }, 
+			new Status { Text = "DEC", Value = "DEC" }, 
+			new Status { Text = "RFP", Value = "RFP" }
+		};
+
+	var typesOfUse = new[]
+		{
+			new TypeOfUse { Text = "", Value = "" },
+			new TypeOfUse { Text = "STK", Value = "STK" },
+			new TypeOfUse { Text = "IRR", Value = "IRR" }, 
+			new TypeOfUse { Text = "IND", Value = "IND" }, 
+			new TypeOfUse { Text = "PWR", Value = "PWR" }
+		};
+}
+
+@Html.HiddenFor(m => m.Id)
+<div class="control-group">
+	@Html.LabelFor(m => m.Basin, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.Basin)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.AppNumber, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.AppNumber)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.DateOfCertificate, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBox("DateOfCertificate", Model.DateOfCertificate.HasValue ? Model.DateOfCertificate.Value.ToString("MM/dd/yyyy") : "", new { @class = "datepicker" })
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.Status, new { @class = "control-label" })
+	<div class="controls">
+		@Html.DropDownListFor(m => m.Status, new SelectList(statuses, "Value", "Text"))
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.TypeOfUse, new { @class = "control-label" })
+	<div class="controls">
+		@Html.DropDownListFor(m => m.TypeOfUse, new SelectList(typesOfUse, "Value", "Text"))
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.OwnerOfRecord, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.OwnerOfRecord)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.FileDate, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBox("FileDate", Model.FileDate.HasValue ? Model.FileDate.Value.ToString("MM/dd/yyyy") : "", new { @class = "datepicker" })
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.ChangeApp, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.ChangeApp)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.Cert, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.Cert)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.DivRate, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.DivRate)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.AnnualDuty, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.AnnualDuty)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.Units, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.Units)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.Source, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.Source)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.Sup, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.Sup)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.PODSec, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.PODSec)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.PODTwn, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.PODTwn)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.PODRng, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.PODRng)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.PODQQ, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.PODQQ)
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.PODQtr, new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextBoxFor(m => m.PODQtr)
+	</div>
+</div>
+<div class="control-group">
+	<label for="ActionRequiredDateText" class="control-label">Action Required By Date</label>
+	<div class="controls">
+		@Html.TextBox("ActionRequiredDateText", Model.ActionRequiredDate)<span class="help-inline">(ex: "2014", "11/07/2013")</span>
+	</div>
+</div>
+<div class="control-group">
+	@Html.LabelFor(m => m.ActionRequiredText, "Action Required Information", new { @class = "control-label" })
+	<div class="controls">
+		@Html.TextAreaFor(m => m.ActionRequiredText, 4, 12, null)
+	</div>
+</div>

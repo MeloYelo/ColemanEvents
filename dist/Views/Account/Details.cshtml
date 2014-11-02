@@ -1,0 +1,69 @@
+﻿@model WGRanch.ViewModels.AccountDetailsViewModel
+
+@{
+	ViewBag.Title = "Account Details";
+}
+
+
+<div class="row">
+	<div class="span12">
+		<div class="widget">
+			<div class="widget-header">
+				<h3>Account (@Model.Account.Id)</h3>
+			</div>
+			<div class="widget-content">
+				<form class="form-horizontal" method="POST" action="@Url.Action("Details", "Account", new { Id = Model.Account.Id })">
+					<fieldset>
+						<div class="control-group">
+							@Html.Label("Username", "Username", new { @class = "control-label" })
+							<div class="controls">
+								@Html.TextBox("Username", Model.Account.Username)
+							</div>
+						</div>
+						<div class="control-group">
+							@Html.Label("Name", "Name", new { @class = "control-label" })
+							<div class="controls">
+								@Html.TextBox("Name", Model.Account.Name)
+							</div>
+						</div>
+						<div class="control-group">
+							@Html.Label("NewPassword", "Password", new { @class = "control-label" })
+							<div class="controls">
+								@Html.Password("NewPassword")
+							</div>
+						</div>
+						<div class="control-group">
+							@Html.Label("Confirm", "Confirm", new { @class = "control-label" })
+							<div class="controls">
+								@Html.Password("Confirm")
+							</div>
+						</div>
+						<div class="control-group">
+							@Html.Label("Roles", "Role(s)", new { @class = "control-label" })
+							<div class="controls">
+								<select multiple="multiple" id="Roles" name="Roles">
+									<option value="Staff"@(Model.Account.Roles.Contains("Staff") ? " selected=\"selected\"" : "") >Staff</option>
+									<option value="Manager"@(Model.Account.Roles.Contains("Manager") ? " selected=\"selected\"" : "") >Manager</option>
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<label>
+									@Html.CheckBox("IsAdmin", Model.Account.IsAdmin)
+									Is Admin
+								</label>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<button type="submit" class="btn btn-primary">Save Changes</button>
+								@Html.ActionLink("cancel", "List", "Account")
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

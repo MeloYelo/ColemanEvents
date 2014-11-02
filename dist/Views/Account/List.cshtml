@@ -1,0 +1,36 @@
+﻿@model WGRanch.ViewModels.AccountListViewModel
+
+@{
+	ViewBag.Title = "List of Accounts";
+}
+
+
+<div class="row">
+	<div class="span12">
+		<div class="widget widget-table action-table">
+			<div class="widget-header">
+				<h3>Accounts</h3>
+				<a class="btn btn-small btn-success pull-right" title="add new water right" href="@Url.Action("Create", "Account")"><i class="icon-plus icon-white"></i></a>
+			</div>
+			<div class="widget-content">
+				<table id="Accounts" class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var account in Model.Accounts)
+			{
+							<tr>
+								<td>@Html.ActionLink((string.IsNullOrWhiteSpace(account.Name) ? "-" : account.Name), "Details", "Account", new { account.Id }, null)</td>
+								<td>@Html.ActionLink((string.IsNullOrWhiteSpace(account.Username) ? "-" : account.Username), "Details", "Account", new { account.Id }, null)</td>
+							</tr>
+			}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

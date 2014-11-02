@@ -1,0 +1,259 @@
+﻿@model WGRanch.ViewModels.WaterRightDetailsViewModel
+
+@{
+	ViewBag.Title = "Water Right Details";
+}
+<div class="row">
+	<div class="span8">
+		<div class="widget">
+			<div class="widget-header">
+				<h3>Water Right @Model.WaterRight.AppNumber
+				</h3>
+			</div>
+			<div class="widget-content">
+				<div class="row">
+					<div class="span2 display-label">
+						Basin
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.Basin
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						App #
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.AppNumber
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Date of Certificate
+					</div>
+					<div class="span5 display-data">
+						@(Model.WaterRight.DateOfCertificate.HasValue ? Model.WaterRight.DateOfCertificate.Value.ToShortDateString() : "")
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Status
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.Status
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Type of Use
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.TypeOfUse
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Owner of Record
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.OwnerOfRecord
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						File Date
+					</div>
+					<div class="span5 display-data">
+						@(Model.WaterRight.FileDate.HasValue ? Model.WaterRight.FileDate.Value.ToShortDateString() : "")
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Change App.
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.ChangeApp
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Cert
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.Cert
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Div Rate (CFS) 
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.DivRate
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Annual Duty
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.AnnualDuty
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Units
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.Units
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Source
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.Source
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Sup
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.Sup
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						POD Sec
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.PODSec
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						POD Twn
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.PODTwn
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						POD Rng
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.PODRng
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						POD QQ
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.PODQQ
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						POD Qtr
+					</div>
+					<div class="span5 display-data">
+						@Model.WaterRight.PODQtr
+					</div>
+				</div>
+				<div class="row">
+					<div class="span2 display-label">
+						Attachments
+					</div>
+					<div class="span5 display-data">
+						<ul id="Attachments">
+							@foreach (var attachment in Model.Attachments)
+			 {
+								<li>
+									<a target="_blank" href="@Url.AttachmentUrlShorted(attachment)">@attachment.OriginalFileName</a>
+									@if (attachment.Id == Model.WaterRight.PrimaryAttachmentId)
+				 {
+										<span class="info">&nbsp;primary</span>
+				 }
+				 else
+				 {
+					 using (Html.BeginForm("SetPrimaryAttachment", "WaterRight", FormMethod.Post, new { @class = "form-inline" }))
+					 {
+										@Html.Hidden("AttachmentId", attachment.Id)
+										@Html.Hidden("WaterRightId", Model.WaterRight.Id)
+										<button type="submit" class="btn btn-mini">make primary</button>
+					 }
+					 using (Html.BeginForm("RemoveAttachment", "WaterRight", FormMethod.Post, new { @class = "form-inline" }))
+					 {
+										@Html.Hidden("AttachmentId", attachment.Id)
+										@Html.Hidden("WaterRightId", Model.WaterRight.Id)
+										<button type="submit" class="btn btn-mini"><i class="icon-remove"></i></button>
+					 }
+
+				 }
+								</li>
+			 }
+							<li>
+								@using (Html.BeginForm("UploadAttachment", "WaterRight", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline" }))
+				{
+									<h6>New Attachment
+									</h6>
+									@Html.Hidden("WaterRightId", Model.WaterRight.Id)
+									<input type="file" multiple="multiple" id="Attachment" name="Attachment" class="input-small" />
+									<br />
+									<label>
+										<input type="checkbox" name="IsPrimary" id="IsPrimary" value="true" />
+										Is Primary
+									</label>
+									<button type="submit" class="btn">attach</button>
+				}
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Styles
+{
+	<style type="text/css">
+		.display-label
+		{
+			text-align: right;
+			font-weight: bold;
+		}
+
+			.display-label:after
+			{
+				content: ":";
+			}
+
+		.display-data
+		{
+		}
+
+		#Attachments form
+		{
+			display: inline-block;
+			padding: 0px;
+			margin: 0px;
+		}
+
+			#Attachments form h6
+			{
+				margin-top: 20px;
+			}
+
+		#Attachments
+		{
+			list-style: none;
+			padding: 0px;
+			margin: 0px;
+		}
+	</style>
+}

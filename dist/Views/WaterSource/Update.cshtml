@@ -1,0 +1,17 @@
+﻿@model WGRanch.Models.Well
+
+@{
+	ViewBag.Title = "Update Water Source";
+}
+@using (Html.BeginForm())
+{
+	@Html.ValidationSummary()
+	<fieldset class="form">
+		<legend>Update Water Source</legend>
+		@Html.Partial("_CreateUpdate", Model)
+		<br />
+		<button class="button" type="submit">
+			Apply Changes
+		</button>
+	</fieldset>
+}

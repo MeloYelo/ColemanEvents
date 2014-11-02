@@ -1,0 +1,30 @@
+﻿@model WGRanch.ViewModels.AccountCreateViewModel
+@{
+	ViewBag.Title = "Create Account";
+}
+
+<h2>Create Account</h2>
+@using (Html.BeginForm())
+{
+	@Html.ValidationSummary()
+	<br />
+	
+	@Html.LabelFor(m => m.Username)
+	<br />
+	@Html.TextBoxFor(m => m.Username)
+	<br />
+	
+	@Html.LabelFor(m => m.Password)
+	<br />
+	@Html.PasswordFor(m => m.Password)
+	<br />
+	
+	@Html.LabelFor(m => m.Confirm)
+	<br />
+	@Html.PasswordFor(m => m.Confirm)
+	<br />
+	
+	<button type="submit">
+		Create Account
+	</button>
+}

@@ -1,0 +1,144 @@
+﻿@model WGRanch.ViewModels.WellDetailsViewModel
+@{
+	ViewBag.Title = "Well Details";
+}
+
+<fieldset>
+	<legend>Water Source Details</legend>
+	<h3>
+		@Model.Well.Description
+	</h3>
+	@Html.LabelFor(m => m.Well.CasingSize)
+	@Html.DisplayFor(m => m.Well.CasingSize)
+	<br />
+	@Html.LabelFor(m => m.Well.WellDepth)
+	@Html.DisplayFor(m => m.Well.WellDepth)
+	<br />
+	@Html.LabelFor(m => m.Well.PumpDepth)
+	@Html.DisplayFor(m => m.Well.PumpDepth)
+	<br />
+	@Html.LabelFor(m => m.Well.MotorSize)
+	@Html.DisplayFor(m => m.Well.MotorSize)
+	<br />
+	@Html.LabelFor(m => m.Well.DesignFlow)
+	@Html.DisplayFor(m => m.Well.DesignFlow)
+	<br />
+	@Html.LabelFor(m => m.Well.TestedFeb2011)
+	@Html.DisplayFor(m => m.Well.TestedFeb2011)
+	<br />
+	@Html.LabelFor(m => m.Well.ConditionFeb2011)
+	@Html.DisplayFor(m => m.Well.ConditionFeb2011)
+	<br />
+	@Html.LabelFor(m => m.Well.Pivot)
+	@Html.DisplayFor(m => m.Well.Pivot)
+	<br />
+	@Html.LabelFor(m => m.Well.YearDrilled)
+	@Html.DisplayFor(m => m.Well.YearDrilled)
+	<br />
+	@Html.LabelFor(m => m.Well.Longitude)
+	@Html.DisplayFor(m => m.Well.Longitude)
+	<br />
+	@Html.LabelFor(m => m.Well.Latitude)
+	@Html.DisplayFor(m => m.Well.Latitude)
+	<br />
+	@Html.LabelFor(m => m.Well.WaterSourceType)
+	@Html.DisplayFor(m => m.Well.WaterSourceType)
+	<br />
+	@Html.LabelFor(m => m.Well.SerialNumber)
+	@Html.DisplayFor(m => m.Well.SerialNumber)
+	<br />
+	@Html.LabelFor(m => m.Well.OtherName)
+	@Html.DisplayFor(m => m.Well.OtherName)
+	<br />
+	@Html.LabelFor(m => m.Well.NumberOfTanks)
+	@Html.DisplayFor(m => m.Well.NumberOfTanks)
+	<br />
+	@Html.LabelFor(m => m.Well.PermitNumber)
+	@Html.DisplayFor(m => m.Well.PermitNumber)
+	<br />
+	@Html.LabelFor(m => m.Well.NewId)
+	@Html.DisplayFor(m => m.Well.NewId)
+	<br />
+	@Html.LabelFor(m => m.Well.PointOfDiversion)
+	@Html.DisplayFor(m => m.Well.PointOfDiversion)
+	<br />
+	@Html.LabelFor(m => m.Well.Remarks)
+	@Html.DisplayFor(m => m.Well.Remarks)
+	<br />
+	@Html.LabelFor(m => m.Well.TankSizes)
+	@Html.DisplayFor(m => m.Well.TankSizes)
+	<br />
+	@Html.LabelFor(m => m.Well.HaveGps)
+	@Html.DisplayFor(m => m.Well.HaveGps)
+	<br />
+	<hr />
+	<h4>Attachments
+	</h4>
+	<ul id="Attachments">
+		@foreach (var attachment in Model.Attachments)
+	{
+			<li>
+				<a target="_blank" href="@Url.AttachmentUrlShorted(attachment)">@attachment.OriginalFileName</a>
+				<form method="POST" action="@Url.Action("RemoveAttachment", "WaterSource")">
+					@Html.Hidden("WellId", Model.Well.Id)
+					@Html.Hidden("AttachmentId", attachment.Id)
+					<button type="submit" class="btn btn-mini btn-danger">X</button>
+				</form>
+			</li>
+	}
+	</ul>
+	@using (Html.BeginForm("UploadAttachment", "WaterSource", FormMethod.Post, new { enctype = "multipart/form-data" }))
+ {
+		@Html.Hidden("WellId", Model.Well.Id)
+		<input type="file" multiple="multiple" name="files" />
+		<br />
+		<button class="button" type="submit">
+			Attach File(s)
+		</button>
+ }
+</fieldset>
+
+@section Styles
+{
+	<style type="text/css">
+		#Attachments
+		{
+			list-style: none;
+			padding-left: 10px;
+		}
+
+			#Attachments li
+			{
+			}
+
+				#Attachments li form
+				{
+					display: inline-block;
+					margin: 0px;
+					padding: 0px;
+				}
+
+		fieldset
+		{
+			display: inline-block;
+		}
+
+		label
+		{
+			display: inline-block;
+			font-weight: bold;
+			margin-top: 5px;
+			margin-left: 10px;
+		}
+
+		h3
+		{
+			padding: 10px 0px;
+		}
+
+		h4
+		{
+			padding-top: 10px;
+		}
+	</style>
+}

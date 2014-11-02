@@ -1,0 +1,16 @@
+﻿@model WGRanch.ViewModels.WaterRightCreateViewModel
+@{
+	ViewBag.Title = "Create Water Right";
+}
+@using (Html.BeginForm())
+{
+	@Html.ValidationSummary()
+	<fieldset class="form">
+		<legend>Create Water Right</legend>
+		@Html.Partial("_CreateUpdate", Model.WaterRight)
+		<br />
+		<button class="button" type="submit">
+			Create Water Right
+		</button>
+	</fieldset>
+}

@@ -1,0 +1,53 @@
+﻿<ol class="breadcrumb">
+  <li><a href="#/list">List of Events</a></li>
+  <li class="active">Assignments</li>
+</ol>
+<h2>
+	Event: {{ vm.event.name }}
+</h2>
+<hr />
+<h3>
+	New Assignment
+</h3>
+<form class="form-inline" role="form" ng-submit="vm.addAssignment(vm.newAssignment)">
+	<div class="form-group form-group-lg">
+		<input class="form-control" type="text" ng-model="vm.newAssignment.name" placeholder="Name of new assignment" />
+	</div>
+	<div class="form-group form-group-lg">
+		<input class="form-control" type="text" ng-model="vm.newAssignment.count" placeholder="Count" />
+	</div>
+	<div class="form-group form-group-lg">
+		<button class="btn btn-lg btn-primary" type="submit">add</button>
+	</div>
+</form>
+
+<table class="table table-striped" ng-show="vm.event.assignments.length">
+	<thead>
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Assigned To
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="a in vm.event.assignments | orderBy:'name'">
+			<td>
+				{{a.name}}
+			</td>
+			<td>
+				<span ng-show="a.assignedTo">
+					{{a.assignedTo}}
+				</span>
+				<span ng-hide="a.assignedTo">
+					not assigned
+				</span>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p class="lead" ng-hide="vm.event.assignments.length">
+	There are no assignments for this event
+</p>

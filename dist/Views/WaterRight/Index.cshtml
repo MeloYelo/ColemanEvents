@@ -1,0 +1,226 @@
+﻿@model WGRanch.ViewModels.WaterRightIndexViewModel
+
+@{
+	ViewBag.Title = "Water Rights";
+}
+<div class="row">
+	<div class="span12">
+		<div class="widget widget-table action-table">
+			<div class="widget-header">
+				<h3>Water Rights</h3>
+
+				@if (Model.UserCanEditWaterRight && Model.UserCanDeleteWaterRight)
+		{
+					<a class="btn btn-small btn-success pull-right" title="add new water right" href="@Url.Action("Create", "WaterRight")"><i class="btn-icon-only icon-plus icon-white"></i></a>
+		}
+			</div>
+			<div class="widget-content">
+				@if (Model.WaterRights != null)
+		{
+					<table id="WaterRights" class="table table-striped">
+						<thead>
+							<tr>
+								<th>Basin<span class="sorting_icon"></span></th>
+								<th>App #<span class="sorting_icon"></span></th>
+								<th>Date of Certificate<span class="sorting_icon"></span></th>
+								<th>Status<span class="sorting_icon"></span></th>
+								<th>Type of Use<span class="sorting_icon"></span></th>
+								<th>Owner of Record<span class="sorting_icon"></span></th>
+								<th>File Date<span class="sorting_icon"></span></th>
+								<th>Action Required Date<span class="sorting_icon"></span></th>
+								@if (Model.UserCanEditWaterRight || Model.UserCanDeleteWaterRight)
+				{
+									<th class="td-actions">&nbsp;</th>
+				}
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var waterRight in Model.WaterRights)
+			 {
+								<tr data-water-right-id="@waterRight.Id">
+									<td>@waterRight.Basin</td>
+									<td>@Html.ActionLink(@waterRight.AppNumber, "Details", "WaterRight", new { waterRight.Id }, null)</td>
+									<td>@(waterRight.DateOfCertificate.HasValue ? waterRight.DateOfCertificate.Value.ToShortDateString() : "")</td>
+									<td>@waterRight.Status</td>
+									<td>@waterRight.TypeOfUse</td>
+									<td>@waterRight.OwnerOfRecord</td>
+									<td>@(waterRight.FileDate.HasValue ? waterRight.FileDate.Value.ToShortDateString() : "")</td>
+									<td>@waterRight.ActionRequiredDate</td>
+									@if (Model.UserCanEditWaterRight || Model.UserCanDeleteWaterRight)
+				 {
+										<td class="td-actions">
+											@if (Model.UserCanDeleteWaterRight)
+					 {
+						 using (Html.BeginForm("Delete", "WaterRight", FormMethod.Post, new { @class = "form-inline" }))
+						 {
+												@Html.Hidden("WaterRightId", waterRight.Id)
+												<button class="confirm btn btn-danger btn-small" data-confirm-text="Are you sure you want to delete the water right?" title="Delete Water Right" type="submit"><i class="icon-remove btn-icon-only"></i></button>
+						 }
+					 }
+											@if (Model.UserCanEditWaterRight)
+					 {
+						 using (Html.BeginForm("Update", "WaterRight", FormMethod.Get, new { @class = "form-inline" }))
+						 {
+												@Html.Hidden("WaterRightId", waterRight.Id)
+												<button class="btn btn-small" title="Edit Water Right" type="submit"><i class="icon-edit"></i>edit</button>
+						 }
+					 }
+										</td>
+				 }
+								</tr>
+			 }
+						</tbody>
+					</table>
+		}
+			</div>
+		</div>
+	</div>
+</div>
+@section Styles
+{
+	<style type="text/css">
+		.widget-header .btn
+		{
+			margin-right: 13px;
+			margin-top: 7px;
+			padding: 0px;
+		}
+
+			.widget-header .btn i
+			{
+				margin: 0px;
+				color: white;
+				padding: 6px;
+				font-size: 13px;
+			}
+
+		#WaterRights form
+		{
+			display: inline-block;
+			margin: 0px;
+			padding: 0px;
+		}
+
+		#WaterRights .td-actions
+		{
+			width: 95px;
+		}
+
+		#WaterRights th
+		{
+			position: relative;
+			padding-right: 10px;
+		}
+
+			#WaterRights th .sorting_icon
+			{
+				position: absolute;
+				width: 19px;
+				height: 19px;
+				right: 0px;
+				bottom: 7px;
+			}
+
+			#WaterRights th.sorting_asc .sorting_icon
+			{
+				background-image: url("/Content/images/sort_asc.png");
+			}
+
+			#WaterRights th.sorting_desc .sorting_icon
+			{
+				background-image: url("/Content/images/sort_desc.png");
+			}
+
+			#WaterRights th.sorting_asc,
+			#WaterRights th.sorting_desc,
+			#WaterRights th.sorting
+			{
+				cursor: pointer;
+			}
+
+		.dataTables_wrapper
+		{
+			position: relative;
+			padding-bottom: 30px;
+		}
+
+		.dataTables_filter
+		{
+			position: absolute;
+			right: 50px;
+			top: -37px;
+		}
+
+			.dataTables_filter label,
+			.dataTables_filter input
+			{
+				display: inline-block;
+			}
+
+				.dataTables_filter input[type="text"]
+				{
+					width: 150px;
+				}
+
+				.dataTables_filter label input
+				{
+					position: relative;
+					top: 3px;
+				}
+
+		.dataTables_paginate
+		{
+			position: absolute;
+			right: 15px;
+			bottom: 0px;
+		}
+
+		.dataTables_wrapper table tr:last-child td
+		{
+			border-bottom: 1px solid #ddd;
+		}
+
+		.dataTables_paginate a
+		{
+			display: inline-block;
+			padding: 3px;
+			cursor: pointer;
+		}
+
+			.dataTables_paginate a.paginate_button_disabled
+			{
+				cursor: default;
+				color: silver;
+			}
+
+				.dataTables_paginate a.paginate_button_disabled:hover
+				{
+					text-decoration: none;
+				}
+
+			.dataTables_paginate a.paginate_active
+			{
+				color: #333;
+				font-weight: bold;
+			}
+
+				.dataTables_paginate a.paginate_active:hover
+				{
+					text-decoration: none;
+					cursor: default;
+				}
+	</style>
+}
+@section Scripts
+{
+	@Scripts.Render("~/Scripts/jquery.dataTables.js")
+	<script type="text/javascript">
+		$(function () {
+			$("#WaterRights").dataTable({
+				"sDom": "ftp",
+				"iDisplayLength": 20,
+				"sPaginationType": "full_numbers"
+			});
+		});
+	</script>
+}

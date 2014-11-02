@@ -1,0 +1,170 @@
+﻿@using WGRanch.Infrastructure.Constants
+@using WGRanch.Models
+@{
+	var sessionManager = ViewContext.HttpContext.GetSessionManager();
+	string controller = ViewContext.GetContollerName().ToLowerInvariant();
+	string activeLink = controller;
+	if (controller == "watersource" || controller == "pivot" || controller == "tank" || controller == "fencing")
+	{
+		activeLink = "ranch";
+	}
+	bool isAdmin = sessionManager.Account.IsAdmin;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>@ViewBag.Title - Winecup Gamble Ranch</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+
+	@Styles.Render(BundleConfig.CssSiteBundle, BundleConfig.CssJQueryUIThemeBundle)
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	@RenderSection("Styles", false)
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="@Url.Action("Index", "Home")">
+					Winecup Gamble Ranch
+				</a>
+				<div class="nav-collapse">
+					<ul class="nav pull-right">
+						<li class="dropdown">
+							<a href="#" class="username dropdown-toggle" data-toggle="dropdown">
+								<i class="icon-user"></i>
+								@(sessionManager.Account.Name ?? sessionManager.Account.Username)
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								@if (isAdmin)
+								{
+									<li><a href="@Url.Action("Index", "Account")"><i class="icon-user"></i>Accounts</a></li>
+									<li><a href="@Url.Action("Index", "Batch")"><i class="icon-inbox"></i>Batching</a></li>
+								}
+								<li><a href="@Url.Action("LogOff", "Account")"><i class="icon-signout"></i>Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /navbar-inner -->
+	</div>
+	<!-- /navbar -->
+	<div class="subnavbar">
+		<div class="subnavbar-inner">
+			<div class="container">
+				<ul class="mainnav">
+					<li class="@(activeLink == "ranch" ? "active" : "") dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-home"></i>
+							<span>Ranch Operations</span>
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="@Url.Action("Index", "WaterSource")" target="_self">Water Sources</a></li>
+							<li><a href="@Url.Action("Index", "Pivot")" target="_self">Pivots</a></li>
+							<li><a href="@Url.Action("Index", "Tank")" target="_self">Tanks</a></li>
+							<li><a href="@Url.Action("Index", "Fencing")" target="_self">Fencing</a></li>
+						</ul>
+					</li>
+
+					<li class="@(activeLink == "waterright" ? "active" : "")">
+						<a href="@Url.Action("Index", "WaterRight")" target="_self">
+							<i class="icon-tint"></i>
+							<span>Water Rights</span>
+						</a>
+					</li>
+
+					<li class="@(activeLink == "mineral" ? "active" : "")">
+						<a href="@Url.Action("Index", "Mineral")" target="_self">
+							<i class="icon-picture"></i>
+							<span>Minerals</span>
+						</a>
+					</li>
+
+					<li class="@(activeLink == "propertyeasements" ? "active" : "")">
+						<a href="@Url.Action("Index", "PropertyEasements")" target="_self">
+							<i class="icon-th-large"></i>
+							<span>Propery & Easements</span>
+						</a>
+					</li>
+
+					<li class="@(activeLink == "attachment" ? "active" : "")">
+						<a href="@Url.Action("Index", "Attachment")" target="_self">
+							<i class="icon-file-alt"></i>
+							<span>Attachments</span>
+						</a>
+					</li>
+
+					<li>
+						<a href="https://jacksoneng.maps.arcgis.com/home/signin.html?returnUrl=http%3A%2F%2Fjacksoneng.maps.arcgis.com%2Fhome%2Findex.html" target="_blank">
+							<i class="icon-globe"></i>
+							<span>Mapping App</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /subnavbar-inner -->
+	</div>
+	<!-- /subnavbar -->
+	@{
+		var messages = TempData[Keys.Messages] as List<Message>;
+		if (messages != null)
+		{
+			<div class="alerts">
+				<div class="alerts-inner">
+					<div class="container">
+						@foreach (var message in messages)
+						{
+							<div class="alert @message.CssClass">
+								<button type="button" class="close" data-dismiss="alert">x</button>
+								@message.Text
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+		}
+	}
+	<div class="main">
+		<div class="main-inner">
+			<div class="container">
+				@RenderBody()
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="footer-inner">
+			<div class="container">
+				<div class="row">
+					<div class="span12">
+						&copy; @DateTime.Today.Year <a href="http://www.jackson-engineering.com">Jackson Engineering</a>.
+					</div>
+					<!-- /span12 -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /footer-inner -->
+	</div>
+	<!-- /footer -->
+	@Scripts.Render(BundleConfig.JsSiteBundle)
+	@RenderSection("Scripts", false)
+
+</body>
+</html>
